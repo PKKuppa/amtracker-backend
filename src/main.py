@@ -1,5 +1,10 @@
 from fastapi import FastAPI
+from .database import SessionLocal, engine
+from . import model
 
+
+#TODO: this is temporary, need to use db migrations
+model.Base.metadata.create_all(bind=engine)  
 app = FastAPI()
 
 @app.get("/")
