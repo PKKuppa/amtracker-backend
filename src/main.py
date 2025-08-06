@@ -1,11 +1,9 @@
 from fastapi import FastAPI
-from .database import SessionLocal, engine
 from . import model
+from .api.user_routes import router as user_router
 
-
-#TODO: this is temporary, need to use db migrations
-model.Base.metadata.create_all(bind=engine)  
 app = FastAPI()
+app.include_router(user_router)
 
 @app.get("/")
 def root():

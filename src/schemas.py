@@ -18,3 +18,20 @@ class TrackerUpdate(BaseModel):
     max_budget: Optional[float] = None
     is_active: Optional[bool] = None
 
+class TrackerOut(BaseModel):
+    id: int
+    name: str
+    departure_station: str
+    arrival_station: str
+    max_budget: float
+    is_active: bool
+
+    class Config:
+        orm_mode = True
+
+class UserSignup(BaseModel):
+    name: str
+    email: str
+    password: str
+
+
