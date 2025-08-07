@@ -7,7 +7,7 @@ from sqlalchemy.orm import DeclarativeBase
 
 load_dotenv()
 SQLALCHEMY_DATABASE_URL = os.getenv("DATABASE_URL")
-if SQLALCHEMY_DATABASE_URL == None:
+if SQLALCHEMY_DATABASE_URL is None:
     raise ValueError("DATABASE_URL is not set in the environment variables."
                      " Please set it in the .env file.")
 

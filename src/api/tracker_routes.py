@@ -1,5 +1,6 @@
 from fastapi import APIRouter, Depends
 from fastapi import status,HTTPException
+from sqlalchemy import select, func
 from ..schemas import TrackerCreate,TrackerOut
 from ..schemas import TrackerActivate, TrackerUpdate
 from ..model import Tracker
@@ -8,9 +9,15 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 router = APIRouter()
 
+MAX_TRACKERS = 6
+MAX_ACTIVE_TRACKERS = 3
+
 @router.post("/tracker",status_code=status.HTTP_201_CREATED, response_model=TrackerOut)
 async def create_tracker(tracker_create: TrackerCreate, user_id: str, db : AsyncSession = Depends(get_db)):
     #TODO: limit num trackers
+    res = await db.stream(select(func.count()).select_from(Tracker).where(user_id==user_id))
+    print (res)
+
     tracker = Tracker(**tracker_create.model_dump(),user_id=user_id)
     db.add(tracker)
     await db.commit()
