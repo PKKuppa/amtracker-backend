@@ -6,7 +6,6 @@ class TrackerCreate(BaseModel):
     departure_station: str
     arrival_station: str
     max_budget: float
-    is_active: bool
 
 class TrackerActivate(BaseModel):
     is_active: bool
@@ -34,4 +33,10 @@ class UserSignup(BaseModel):
     email: str
     password: str
 
+class UserOut(BaseModel):
+    id: str
+    name: str
+    email: str
 
+    class Config:
+        from_attributes = True

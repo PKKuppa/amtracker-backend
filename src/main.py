@@ -1,9 +1,11 @@
 from fastapi import FastAPI
 from . import model
 from .api.user_routes import router as user_router
+from .api.tracker_routes import router as tracker_router
 
 app = FastAPI()
 app.include_router(user_router)
+app.include_router(tracker_router)
 
 @app.get("/")
 def root():
