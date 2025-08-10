@@ -20,7 +20,8 @@ if config.config_file_name is not None:
 # for 'autogenerate' support
 # from myapp import mymodel
 # target_metadata = mymodel.Base.metadata
-target_metadata = None
+from src.model import Base
+target_metadata = Base.metadata
 
 # other values from the config, defined by the needs of env.py,
 # can be acquired:
@@ -40,12 +41,12 @@ def run_migrations_offline() -> None:
     script output.
 
     """
-    # url = config.get_main_option("sqlalchemy.url")
-    load_dotenv()
-    url = os.getenv("DATABASE_URL")
-    if not url:
-        raise ValueError("DATABASE_URL is not set in the environment variables."
-                     " Please set it in the .env file.")
+    url = config.get_main_option("sqlalchemy.url")
+    # load_dotenv()
+    # url = os.getenv("DATABASE_URL")
+    # if not url:
+    #     raise ValueError("DATABASE_URL is not set in the environment variables."
+    #                  " Please set it in the .env file.")
     
     context.configure(
         url=url,

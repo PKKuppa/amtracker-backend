@@ -3,7 +3,11 @@ from sqlalchemy.orm import mapped_column, Mapped
 from sqlalchemy import ForeignKey
 import uuid
 
-from .database import Base
+from sqlalchemy.ext.asyncio import AsyncAttrs
+from sqlalchemy.orm import DeclarativeBase
+
+class Base(AsyncAttrs,DeclarativeBase):
+    pass
 
 def generate_uuid():
     return str(uuid.uuid4())
@@ -19,7 +23,7 @@ class User(Base):
 class Tracker(Base):
     __tablename__ = "trackers"
 
-    id: Mapped[int] = mapped_column(primary_key=True, index=True, default=0)
+    id: Mapped[str] = mapped_column(primary_key=True, index=True, default=0)
     user_id: Mapped[str] = mapped_column(ForeignKey("users.id"), nullable=False)
     name: Mapped[str] = mapped_column(index=True, nullable=False)
     departure_station: Mapped[str] = mapped_column(index=True, nullable=False)
