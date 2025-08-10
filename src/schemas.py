@@ -18,7 +18,7 @@ class TrackerUpdate(BaseModel):
     is_active: Optional[bool] = None
 
 class TrackerOut(BaseModel):
-    id: int
+    id: str
     name: str
     departure_station: str
     arrival_station: str

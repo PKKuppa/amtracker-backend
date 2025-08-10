@@ -23,7 +23,7 @@ class User(Base):
 class Tracker(Base):
     __tablename__ = "trackers"
 
-    id: Mapped[str] = mapped_column(primary_key=True, index=True, default=0)
+    id: Mapped[str] = mapped_column(primary_key=True, index=True, default=generate_uuid())
     user_id: Mapped[str] = mapped_column(ForeignKey("users.id"), nullable=False)
     name: Mapped[str] = mapped_column(index=True, nullable=False)
     departure_station: Mapped[str] = mapped_column(index=True, nullable=False)
